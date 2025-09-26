@@ -1,0 +1,6 @@
+Flask
+Ollama
+Langchain
+jsonify
+flask_sqlalchemy
+flask_bcrypt

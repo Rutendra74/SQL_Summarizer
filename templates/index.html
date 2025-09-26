@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SQL Summarizer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <!-- Matrix background -->
+  <div class="matrix"><canvas id="matrix"></canvas></div>
+
+  <div class="container text-center text-light">
+    <!-- Logout Button -->
+    <div style="text-align: right; margin-bottom: 10px;">
+      <button id="logoutBtn" class="logout-button">Logout</button>
+    </div>
+
+    <div class="theme-toggle">
+      <label class="switch">
+        <input type="checkbox" id="themeSwitch">
+        <span class="slider round"></span>
+      </label>
+      <span id="themeLabel">Light Mode</span>
+    </div>
+    
+    <h2 class="mb-4">🧠 SQL Summarizer</h2>
+    <form id="queryForm">
+      <div class="mb-3">
+        <textarea id="sqlQuery" rows="5" placeholder="Paste your SQL query here..."></textarea>
+        <button type="submit">Summarize</button>
+      </div>
+    </form>
+
+    <!-- Fake steps while waiting -->
+    <div id="loading" class="loading-steps"></div>
+
+    <!-- Final result -->
+    <div id="result"></div>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script>
+    const logoutBtn = document.getElementById('logoutBtn');
+    logoutBtn.onclick = async function() {
+      try {
+        const res = await fetch('/logout', { method: 'POST', credentials: 'same-origin' });
+        const data = await res.json();
+        if (data.message) {
+          window.location.href = '/login';
+        }
+      } catch(err) {
+        alert('Error logging out');
+      }
+    };
+  </script>
+</body>
+</html>

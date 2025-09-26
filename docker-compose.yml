@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  sql-summarizer:
+    build: .
+    container_name: sql-summarizer-app
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./users.db:/app/users.db
+      - ./static:/app/static
+      - ./templates:/app/templates
+    environment:
+      - FLASK_ENV=development
+      - SECRET_KEY=summarizer_secret_key

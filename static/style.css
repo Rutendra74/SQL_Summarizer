@@ -1,0 +1,270 @@
+body {
+    background: black;
+    color: #f8f9fa;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    
+  }
+  
+  .matrix {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    background: rgb(0, 0, 0);
+    overflow: hidden;
+  }
+  
+  canvas {
+    display: block;
+  }
+  
+  .container {
+    margin-top: 2%;          /* closer to top */
+    background: rgba(0, 0, 0, 0.8);
+    padding: 50px;           /* increased padding */
+    border-radius: 15px;
+    box-shadow: 0 0 20px #00ff99;
+    max-width: 1000px;       /* larger width */
+    width: 90%;              /* responsive */
+    min-height: 80vh;        /* taller container to fill page */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  
+  #sqlQuery {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #00ff99;
+    background: #111;
+    color: #f8f9fa;
+    resize: vertical;
+  }
+  .button-container {
+    text-align: center;   
+    margin-top: 15px;     
+  }
+
+  
+  button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background: #00ff99;
+    color: black;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #00cc77;
+  }
+  
+  .loading-steps {
+    font-size: 1rem;
+    color: #00ff99;
+    margin-top: 15px;
+    min-height: 40px;
+  }
+  
+  #result {
+    font-size: 1.1rem;
+    margin-top: 20px;
+    padding: 15px;
+    background: #111;
+    border-radius: 10px;
+    border: 1px solid #00ff99;
+    max-height: 400px;       /* scrollable box */
+    overflow-y: auto;        /* vertical scroll */
+    white-space: pre-wrap;   /* preserve line breaks */
+  }
+  
+  /* Toggle switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    margin-right: 10px;
+  }
+  
+  .switch input { display: none; }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #00ff99;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+  
+  /* Light mode (default) */
+  body.light-mode {
+    background: #f8f9fa;
+    color: #111;
+    overflow: auto;
+  }
+  
+  body.light-mode .container {
+    background: #ffffff;
+    color: #111;
+    box-shadow: 0 0 20px #999;
+  }
+  
+  body.light-mode #sqlQuery {
+    background: #f0f0f0;
+    color: #111;
+    border: 1px solid #999;
+  }
+  
+  body.light-mode #result {
+    background: #f0f0f0;
+    border: 1px solid #999;
+    color: #111;
+  }
+  
+  body.light-mode .matrix {
+    display: none; /* hide matrix in light mode */
+  }
+  
+  /* Dark mode */
+  body.dark-mode {
+    background: black;
+    color: #f8f9fa;
+  }
+  
+  body.dark-mode .container {
+    background: rgba(0,0,0,0.8);
+    box-shadow: 0 0 20px #00ff99;
+  }
+  
+  body.dark-mode #sqlQuery {
+    background: #111;
+    color: #f8f9fa;
+    border: 1px solid #00ff99;
+  }
+  
+  body.dark-mode #result {
+    background: #111;
+    color: #f8f9fa;
+    border: 1px solid #00ff99;
+  }
+  
+  body.dark-mode .matrix {
+    display: block; /* show matrix */
+  }
+  
+  #result-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+#copyBtn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  background: #00ff99;
+  color: black;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#copyBtn:hover {
+  background: #00cc77;
+}
+#result-container {
+  position: relative;       /* needed for absolute positioning of button */
+  margin-top: 20px;
+}
+
+#result {
+  font-size: 1.1rem;
+  padding: 15px;
+  background: #111;
+  border-radius: 10px;
+  border: 1px solid #00ff99;
+  max-height: 400px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  background: #00ff99;
+  color: black;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.copy-btn:hover {
+  opacity: 1;
+  background: #00cc77;
+}
+.auth-container {
+  background: rgba(0,0,0,0.6);
+    padding: 35px;
+    border-radius: 15px;
+    color: white;
+    backdrop-filter: blur(10px);
+    width: 320px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+}
+
+.auth-container input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+}
+
+.auth-container button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background: #00ff99;
+  color: black;
+  cursor: pointer;
+}
+
+.auth-container button:hover {
+  background: #00cc77;
+}
+
+.auth-container a {
+  color: #00ff99;
+  text-decoration: none;
+}
